@@ -60,9 +60,9 @@
   <div class="content">
     <p>这是我用经典的机器学习算法实践的一些项目，包括Kaggle Titanic，Kaggle House Price，以及拍拍贷“魔镜杯”风控算法比赛。前2个是Kaggle的经典入门比赛，也是我开始学习机器学习的练手项目。项目都完整地包括了数据清洗，异常值处理，数据修复，特征工程(Feature Enginnering)，模型评估，调参(hyper parameter tunning)，Ensembling等。以下是几个项目的Github地址：</p>
 <ul>
-<li>Kaggle-Titanic: <a href="https://github.com/wikke/Kaggle-Titanic">https://github.com/wikke/Kaggle-Titanic</a></li>
-<li>Kaggle-House-Prices: <a href="https://github.com/wikke/Kaggle-House-Prices">https://github.com/wikke/Kaggle-House-Prices</a></li>
-<li>拍拍贷风控模型<a href="https://github.com/wikke/ppdai_risk_evaluation">https://github.com/wikke/ppdai_risk_evaluation</a></li>
+<li><strong>Kaggle-Titanic: <a href="https://github.com/wikke/Kaggle-Titanic">https://github.com/wikke/Kaggle-Titanic</a></strong></li>
+<li><strong>Kaggle-House-Prices: <a href="https://github.com/wikke/Kaggle-House-Prices">https://github.com/wikke/Kaggle-House-Prices</a></strong></li>
+<li><strong>拍拍贷风控模型<a href="https://github.com/wikke/ppdai_risk_evaluation">https://github.com/wikke/ppdai_risk_evaluation</a></strong></li>
 </ul>
 <p>经过这些项目的实战，也参考了大量的优秀notebook，总结出了以下“套路”，算是一些经验总结。</p>
 <h1>数据预处理</h1>
@@ -72,7 +72,7 @@
 </ul>
 <h1>Feature Engineering</h1>
 <ul>
-<li>首先可视化数据。对于预测的result或target看其分布/密度，并进行log调整和outlier drop。</li>
+<li>首先使用seaborn可视化数据。对于预测的result或target看其分布/密度，并进行log调整和outlier drop。</li>
 <li>Feature分为numerical和categorical 2类。</li>
 <li>对于numerical查看其和结果的scatter分布，以及密度分布。并drop outliers</li>
 <li>于numerical Feature如果分布倾斜，尝试log后看是否接近正态分布，如果做了log处理，那么还要对log后的新feature做outlier检测和清除</li>
@@ -92,6 +92,7 @@
 <li>ElasticNet</li>
 <li>ElasticNetCV</li>
 <li>XGBRegressor</li>
+<li>...</li>
 </ul>
 </li>
 <li>KFold/StratifiedKFold cross validation</li>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>图像物体检测(Object Detection)神经网络算法实践 | wikke, All in AI
+</title>
+  <link rel="canonical" href="/object-detection.html">
+
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="本文罗列了这段时间在图像物体检测Object Detection领域的一些尝试。包括简单的固定长度验证码识别，到SSD算法实现的Object Detection。">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="/">wikke, All in AI</a></h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>图像物体检测(Object Detection)神经网络算法实践
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="1970-01-04T00:00:00+08:00">
+        <i class="fa fa-clock-o"></i>
+        日 04 一月 1970
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/machine-learning.html">machine-learning</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/wikke.html">wikke</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/machine-learning.html">#machine-learning</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>本文罗列了这段时间在图像物体检测Object Detection领域的一些尝试。包括简单的固定长度验证码识别，到SSD算法实现的Object Detection。</p>
+<p>以下是几个项目的Github地址：</p>
+<ul>
+<li><strong>Captcha-Recognizer(验证码识别): <a href="https://github.com/wikke/Captcha-Recognizer">https://github.com/wikke/Captcha-Recognizer</a></strong></li>
+<li><strong>SSD(Single Shot MultiBox Detector): <a href="https://github.com/wikke/SSD_Keras">https://github.com/wikke/SSD_Keras</a></strong></li>
+</ul>
+<h2><a href="https://github.com/wikke/Captcha-Recognizer">Captcha-Recognizer</a></h2>
+<p><img src="https://raw.githubusercontent.com/wikke/Captcha-Recognizer/master/assets/model.png" style="width: 100%;"></p>
+<ul>
+<li>神经网络模型太简单（比如只有2层卷积网络），会有strong bias，最终难以达到一个好的预测结果</li>
+<li>模型太复杂（比如10层），收敛会变得非常缓慢。当然我相信数据量充足（这里几乎是无限）的情况下，可以达到更好的效果，不过我等不及了。这是一个trade off</li>
+<li>2层卷积+1层Pooling的组合多次感觉效果最佳。我尝试过“2层卷积+1层Pooling”和"3层卷积+1层Pooling"多种情况，都不如之前。</li>
+<li>strides=1, padding='same'是蛮不错的选择，虽然默认是valid</li>
+<li>个人觉得，我们有必要不断做卷积操作提起特征，然后Pooling，直到图形的size缩小到一定经验值以内（比如10），这样才算是最充分“榨取”了图像的特征信息。再多卷积可能得不到更多有价值信息了，因为已经只有10 size，而Conv的kernel_size和Stride结合起来会马上超过。</li>
+<li>Adadelta, Adagrad, RMSprop是不错的Optimizor选择。Ref:<a href="https://zhuanlan.zhihu.com/p/22252270">深度学习最全优化方法总结比较（SGD，Adagrad，Adadelta，Adam，Adamax，Nadam）</a></li>
+<li>因为我们最终预测的结果是4个完全独立无关的字母/数字，它们的组合是无意义的，因此预测结果最好是4个，而不是1个'字符串'。神经网络肯定会自动感知到预测的第一个和图像最左边的相关，最后一个和最右边相关。</li>
+</ul>
+<h2><a href="https://github.com/wikke/SSD_Keras">SSD</a></h2>
+<p>SSD(Single Shot MultiBox Detector)是一种表现不错的Object Detection算法，在PASCAL VOC 2007有不错的表现。见<a href="http://host.robots.ox.ac.uk:8080/leaderboard/displaylb.php?challengeid=11&amp;compid=3">http://host.robots.ox.ac.uk:8080/leaderboard/displaylb.php?challengeid=11&amp;compid=3</a>。这里我使用了<a href="https://github.com/rykov8/ssd_keras">https://github.com/rykov8/ssd_keras</a>的SSD实现，我更多是把代码梳理清楚，做好封装，易于理解。代码结构如下</p>
+<div class="highlight"><pre><span></span>- SSD.ipynb # Main code
+- generator.py  # customrized generator, which return proper training data structure
+        # including image and assigned boxes(similar to input boxex)
+- get_data_from_XML.py # parse Annotations of PASCAL VOC, helper of generator
+- VOCdevkit # dataset downloaded from [http://host.robots.ox.ac.uk/pascal/VOC/, use The VOC2007 Challenge in this example
+
+- SSD300 # SSD 300 model lib
+  - ssd_v2.py # main model
+  - ssd_layers.py # Normalize and PriorBox defenition
+  - ssd_training.py # MultiboxLoss Definition
+  - ssd_utils.py # Utilities including encode,decode,assign_boxes
+  - prior_boxes_ssd300.pkl # my understanding is the model pre-defined static prior boxes
+</pre></div>
+
+
+<p><img src="https://raw.githubusercontent.com/wikke/SSD_Keras/master/assets/network.png" style="width: 100%;"></p>
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
