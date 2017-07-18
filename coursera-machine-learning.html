@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Coursera Machine Learning课程学习总结 | wikke, All in AI
+</title>
+  <link rel="canonical" href="/coursera-machine-learning.html">
+
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="这是我看Coursera吴恩达机器学习课程后的重点总结，也包含了做课后习题的一些感悟。这也是我机器学习和AI生涯的入门课程。">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="/">wikke, All in AI</a></h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Coursera Machine Learning课程学习总结
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="1970-01-01T00:00:00+08:00">
+        <i class="fa fa-clock-o"></i>
+        四 01 一月 1970
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/machine-learning.html">machine-learning</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="/author/wikke.html">wikke</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/machine-learning.html">#machine-learning</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>Coursera吴恩达机器学习课程是我机器学习和AI生涯的入门课程，吴恩达教授把深奥的机器学习课程讲得通俗易懂，并且编程习题也让学生完成核心的部分。让我深深地感受到一个好的老师，一个好的教学课程，会对一个人的教育产生多么不同的影响。感谢吴恩达Andrew Ng先生。</p>
+<p>我的课后习题放在了Github:<a href="https://github.com/wikke/coursera-machine-learning">https://github.com/wikke/coursera-machine-learning</a></p>
+<p>Coursera课程地址在<a href="https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
+<h1>Lecture Contents</h1>
+<h2>Supervised Learning</h2>
+<ul>
+<li>Linear Regression</li>
+<li>Logistic Regression</li>
+<li>Neural Network</li>
+<li>SVM</li>
+</ul>
+<h2>Unsupervised Learning</h2>
+<ul>
+<li>K-means</li>
+<li>PCA</li>
+<li>Anomaly Detection</li>
+<li>Recommender System</li>
+</ul>
+<h2>Skills</h2>
+<ul>
+<li>Bias/Variance</li>
+<li>Regularization</li>
+<li>Learning Curve-</li>
+<li>Error Analysis</li>
+<li>Ceiling Analysis</li>
+<li>...</li>
+</ul>
+<h1>一、Introduction &amp; Linear Regression</h1>
+<ul>
+<li>cost函数的理解：对于一个数据集X和实际y，对一个hopothesis，都可以计算其cost function，计算的公式不同的情况可能有不同，大多数情况就是X（train、cv或者test）关于h的预测结果和y的差异情况。所以这里computeCost函数只有3个参数X, y, theta</li>
+<li>gradient descent算法的理解：这里手动实现了这个算法（后续会有fmincg等Optimization Algorithm来实现），确定一个迭代次数，然后每次Theta减去alpha乘以J的偏导，gradientDescent函数只需要这些参数：X, y, theta, alpha, num_iters，足够了。</li>
+<li>Feature Normalization的通常做法是，减去均值，然后除以标准差</li>
+<li>习题的扩展部分我也做了，对不同的alpha即Learning Rate按log-scale画出其J_history曲线，然后选择一条最佳的曲线。并且发现，如果alpha过小，则收敛很慢，而过大则会很快，或者diverge</li>
+<li>画J的3D图挺有意思的，用到了linspace、length、figure、surf、contour等命令</li>
+<li>help plot里面有详细的plot参数，比如linestyle,markerstyle,color</li>
+<li>从数学公式转化为矩阵乘法的过程中，需要时刻注意是矩阵相乘，还是<strong>点乘</strong>，要仔细体会其中微妙差异。</li>
+</ul>
+<h1>二、Linear Regression</h1>
+<ul>
+<li>每次都plot一下原始数据，得到一些感性认知蛮重要的</li>
+<li>y == 1和find(y == 1)是不一样的，可以自己试试</li>
+<li>fminunc函数</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c">%  Set options for fminunc</span>
+<span class="n">options</span> <span class="p">=</span> <span class="n">optimset</span><span class="p">(</span><span class="s">&#39;GradObj&#39;</span><span class="p">,</span> <span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="s">&#39;MaxIter&#39;</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+<span class="n">initial_theta</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c">%  Run fminunc to obtain the optimal theta</span>
+<span class="c">%  This function will return theta and the cost</span>
+<span class="p">[</span><span class="n">theta</span><span class="p">,</span> <span class="n">cost</span><span class="p">]</span> <span class="p">=</span> <span class="c">...</span>
+  <span class="n">fminunc</span><span class="p">(@(</span><span class="n">t</span><span class="p">)(</span><span class="n">costFunction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+
+<span class="p">[</span><span class="n">theta</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">exit_flag</span><span class="p">]</span> <span class="p">=</span> <span class="c">...</span>
+  <span class="n">fminunc</span><span class="p">(@(</span><span class="n">t</span><span class="p">)(</span><span class="n">costFunctionReg</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>fminunc接受参数：自定义cost函数（按需要定义costFunc参数，但是需返回J和Grad）、init_theta、options</p>
+</li>
+<li>
+<p>we set the GradObj option to on, which tells fminunc that our function returns both the cost and the gradient. This allows fminunc to use the gradient when minimizing the function.</p>
+</li>
+<li>
+<p>后面加入Regularization term后，根据lambda不同，decision boundary也不同。能明显看得出当lambda很大的时候，decision boundary体现出强烈的high bias，反之则high variance。而且最终可以通过precision, recall计算F1确定最佳lambda（这些内容在后面课程会学习到）</p>
+</li>
+</ul>
+<h2>三、Logistic Regression</h2>
+<ul>
+<li>vectorized很重要，极大地利用多线程，优化计算速度</li>
+<li>
+<p>凡是引入Regularization的情形下，都不把Regularization term中被计算的数据（比如theta vector等）的第0项计入cost，因为它对应的是bias常数部分</p>
+</li>
+<li>
+<p><strong>Multi-Classification的Logistic Regression问题</strong>，即One-vs-all Prediction的核心逻辑代码如下</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c">% Train</span>
+<span class="k">for</span> <span class="n">num</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">num_labels</span><span class="p">,</span>
+  <span class="p">[</span><span class="n">num_theta</span><span class="p">]</span> <span class="p">=</span> <span class="n">fmincg</span> <span class="p">(@(</span><span class="n">t</span><span class="p">)(</span><span class="n">lrCostFunction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">num</span><span class="p">),</span> <span class="n">lambda</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+  <span class="n">all_theta</span><span class="p">(</span><span class="n">num</span><span class="p">,:)</span> <span class="p">=</span> <span class="n">num_theta</span><span class="o">&#39;</span><span class="p">;</span>
+<span class="k">end</span><span class="p">;</span>
+
+<span class="c">% Predict</span>
+<span class="n">predictions</span> <span class="p">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">all_theta</span><span class="o">&#39;</span><span class="p">);</span>
+<span class="p">[</span><span class="n">values</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">predictions</span><span class="o">&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<h3>训练</h3>
+<p>Multi-Classification中的y，在实际中值会是[A B D C B]，假设K=4即4个分类，训练的时候，循环4遍训练。某一次循环到要训练B了，则会把B对应的数据映射为一个vectore Y_B = [0 1 0 0 1]的数据，然后这次遍历的训练，其实就是对于train数据X和Y_B的0-1分类训练，从而得到B对应的Theta_B。在得到所有K个元素对应的Theta后，合并成为一个Theta（实际中会通过vectorized方式计算）</p>
+<h3>预测</h3>
+<p>对于一个测试样本x，乘以theta，并且求sigmoid，然后会得到x_prediction，可能会像[0.01 0.02 0.98 0.02]，也就是需要测试的x对于我们结果集中每一个的可能性大小，我们当然选择可能性最大的那个。</p>
+<p>这里lrCostFunction中也引用了同样的sigmoid函数</p>
+<ul>
+<li>
+<p>神经网络这里一个简单的Forward Propagation的例子，每一层的a添加第一个bias元素后，乘以本层对应的Theta，并求sigmoid，得到下一层的a</p>
+</li>
+<li>
+<p>randperm(100)会得到1到100数组的随机排列数组，在随机选择某几个元素的时候比较常用</p>
+</li>
+</ul>
+<h2>四、Neural Network</h2>
+<p>Neural Network的计算分为2部分，Forward Propagation和Back Propagation</p>
+<h3>Forward Propagation</h3>
+<ul>
+<li>随机初始化定义每一层的的weight，即Theta，这样可以避免系统对称问题(for symmetry breaking)</li>
+<li>然后用train set逐层推导计算出每一层的activations，并最终计算出prediction，然后计算cost function（without Regularization）</li>
+<li>添加Regularization term，记得每个Theta去掉第一项</li>
+</ul>
+<h3>Back Propagation</h3>
+<ul>
+<li>相当于计算每一层每一个node的error（第一层输入层没有error，最后一层其实也就是y - prediction），即第2层到第l层</li>
+<li>上一层s(l)的error的计算，牵扯了下一层s(l+1)的error，本层的Theta和本层的z。可以理解为error和Theta在做error向前推导转化，z是权重</li>
+<li>Regularization的牵扯了第1层到第l-1层的Theta。需要排除bias term</li>
+</ul>
+<h3>其它</h3>
+<ul>
+<li>在随机初始化s(l)和s(l+1)的Theta(l)的时候，随机数所参考的epsilon值最好是: sqrt(6) / sqrt(L_in + L_out)</li>
+</ul>
+<h2>五、Neural Network, cont.</h2>
+<ul>
+<li>伴随所有的实际问题，参数的调整都是必须，一个整体的思想就是，不断变化参数（log scale)，然后选择J(cv)最小的那个。</li>
+<li>不管是lambda，d(多项式次方),l(neural network layers)，或者其它，都伴随这个参数从小到大变化的过程中，从high bias到high variance（或者相反）的一个变化，也就引来了J(train)和J(cv)的从都很高，到差不多，到J(train)很低，J(cv)很高（或者相反）。</li>
+<li>不管不同的，随着输入数据集样本大小的不同，J(train)和J(cv)是另一种情形。high bias是2者详尽，但是都很大。high variance是2者相差大，不管J(train)很小</li>
+<li>通过绘制Learning Curve来判断算法是否Bias/Variance是比较通常的做法，算法也很简单，从1到m（也可以稀疏一些，或者部分）标记为i的数据集，即X和y的前i项，然后通过各种算法训练出结果（比如Theta），然后计算这次遍历i的cost。最终会得到一个i和cost的关系，从而绘制Learning Curve。需要注意的是，这里的cost不需要包括Regularization部分（因为不是在计算cost，而是计算error，见validationCurve.m &amp; learningCurve.m）</li>
+<li>In particular, note that the training error does not include the regularization term</li>
+</ul>
+<h2>六、Algorithms</h2>
+<h3>SVM</h3>
+<ul>
+<li>
+<p>区别于Regression通过模型，拟合以匹配、预测数据的方式，SVM通过最大间距的方式划分开数据，因此也被成伟Large Margin Classifier。在这个过程中，我们需要定义相似函数，对于Linear问题，使用Linear Kernel，对于Non-Linear问题使用Gaussian Kernel，字符串相似可以使用String Kernel，等等。</p>
+</li>
+<li>
+<p>Logistic Regression问题的Optimization Algorithm需要带入Cost Function(包含X，y)，lambda，init_theta和options，算法要实现grad</p>
+</li>
+<li>SVM需要带入Similarity Function,X,y和C</li>
+</ul>
+<h3>Spam Classifier</h3>
+<ul>
+<li>类似这样实际问题比较关键的步骤在于，如何把问题转化为可被操作的数据，从而使用ML算法。和算法无关的，我们把一封邮件里的特征提取出来（比如高频词语，标点符号数量，邮件的trace IP，邮件的服务提供商等），然后构建vocabulary和其它信息，从而使得对于train，cv，test中的一个输入x，可以转化为针对特征的向量表示(感觉有点神似于normalization，不过当然不是，后面如果使用SVM，还是必须再次正式地normalization，否则可能出现某些特征值dominate的情况)。</li>
+<li>然后如果使用SVM算法，就需要定义Similarity Function，不断调整C和sita^2，得到最佳参数，实现预测。</li>
+</ul>
+<h3>K-means</h3>
+<ul>
+<li>遍历若干遍（防止落入local minimal），每次随机找K个init_centroid（最好是已有的元素）。每次遍历的时候，把每一个元素标记它归属（距离最近）的centroid，完了之后，重新计算新的centroid。</li>
+<li>若干遍遍历完了以后，找出distortion最小的那个，即最佳Clustering。特别是K比较小的情况下，需要遍历更多遍。</li>
+</ul>
+<h3>CPA</h3>
+<ul>
+<li>核心代码如下</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c">% production</span>
+<span class="n">U_reduce</span> <span class="p">=</span> <span class="n">U</span><span class="p">(:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">K</span><span class="p">);</span>
+<span class="n">Z</span> <span class="p">=</span> <span class="n">X</span> <span class="o">*</span> <span class="n">U_reduce</span><span class="p">;</span>
+
+<span class="c">% recover</span>
+<span class="n">U_reduce</span> <span class="p">=</span> <span class="n">U</span><span class="p">(:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">K</span><span class="p">);</span>
+<span class="n">X_rec</span> <span class="p">=</span> <span class="n">Z</span> <span class="o">*</span> <span class="n">U_reduce</span><span class="o">&#39;</span><span class="p">;</span>
+</pre></div>
+
+
+<ul>
+<li>ext7_pca的代码逻辑很简单，就是一个多维数据同PCA转化为低维，然后在recover，转化为可视化后看效果。不管是二维转1维，还是人脸图像若干维度转为100维。</li>
+<li>最后一个例子是再次回到图片压缩的例子，把图像的所有颜色通过k-means算法归结为16种，然后从图片随机选择1000个sample，在RGB的三维空间画出来，并且不同的聚类颜色也不同。</li>
+<li>把三维通过PCA转化为二维后展示更方便观察，这也是数据的best view</li>
+</ul>
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
