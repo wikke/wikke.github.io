@@ -84,7 +84,7 @@ Resolving deltas: 100% (1206/1206), done.
 - title即网站的标题
 - theme填写你指定的theme。你可以clone多个theme的submodule，这里选择你想用的那个
 
-![image-20210318175001751](blog-with-hugo.assets/image-20210318175001751.png)
+![image-20210317174942476](blog-with-hugo.assets/image-20210317174942476.png)
 
 ## 创建post，即文章/博客
 

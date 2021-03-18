@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 猩球科技</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Mar 2021 19:33:21 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Mar 2021 22:18:01 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First Blog</title>
+      <link>/posts/first-blog/</link>
+      <pubDate>Thu, 18 Mar 2021 22:18:01 +0800</pubDate>
+      
+      <guid>/posts/first-blog/</guid>
+      <description>Hello Title 1  list 1 list 2  int main(){ return 0; } </description>
+    </item>
+    
     <item>
       <title>使用Hugo&#43;Markdown创建个人博客，部署在Github/Gitee</title>
       <link>/posts/blog-with-hugo/</link>
