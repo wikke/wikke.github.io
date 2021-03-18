@@ -4,6 +4,14 @@ date: 2021-03-17T19:33:21+08:00
 draft: true
 ---
 
+## Hugo介绍
+
+Hugo是用Go语言开发的非常流行的开源静态网站生成器，类似于jekyll，Hexo。
+
+得益于Go语言的优良特性，Hugo运行速度非常快。
+
+今天猩哥带大家体验一遍！
+
 ## 安装
 
 ```bash
@@ -14,9 +22,13 @@ draft: true
 Hugo Static Site Generator v0.80.0/extended darwin/amd64 BuildDate: unknown
 ```
 
-## 初始化
+更多操作系统的Hugo安装，参考[https://gohugo.io/getting-started/installing/](https://gohugo.io/getting-started/installing/)
 
-运行`hugo new site <your-blog-name>`初始化一个`hugo`工程
+## 初始化站点
+
+运行`hugo new site <your-site-name>`初始化
+
+比如猩哥打算用Hugo来搭建自己的个人博客[https://wikke.gitee.io/](https://wikke.gitee.io/)、[https://wikke.github.io/](https://wikke.github.io/)
 
 ```bash
 ➜  ~ hugo new site blogs
@@ -34,7 +46,7 @@ Just a few more steps and you're ready to go:
 Visit https://gohugo.io/ for quickstart guide and full documentation.
 ```
 
-初始化git仓库
+进入站点目录，并初始化git仓库
 
 ```
 ➜  cd blogs
@@ -44,11 +56,13 @@ Initialized empty Git repository in /Users/wikke/blogs/.git/
 
 ```
 
-访问 [https://themes.gohugo.io/](https://themes.gohugo.io/) 挑选一个你喜欢的主题theme（这步是必须哦）
+## 配置站点
 
-我挑选了一个[mainroad](https://themes.gohugo.io/mainroad/)的主题
+### 主题
 
-把它的git项目作为**submoule**添加到blog仓库themes下
+访问 [https://themes.gohugo.io/](https://themes.gohugo.io/) 挑选一个你喜欢的主题theme。比如我挑选了一个[mainroad](https://themes.gohugo.io/mainroad/)的主题
+
+把它的git项目作为**submoule**添加到<site>/themes目录下
 
 ```bash
 
@@ -62,6 +76,8 @@ Receiving objects: 100% (2033/2033), 1.17 MiB | 1.11 MiB/s, done.
 Resolving deltas: 100% (1206/1206), done.
 ```
 
+### 站点配置
+
 修改`config.toml`配置
 
 - baseURL需要填写github博客的链接，这里`wikke`对应你的Github ID
@@ -70,10 +86,12 @@ Resolving deltas: 100% (1206/1206), done.
 
 ![image-20210317174942476](blog-with-hugo.assets/image-20210317174942476.png)
 
+## 创建post，即文章/博客
+
 通过Hugo命令创建post，`hugo new posts/blog-with-hugo.md`
 
-- 这里需要增加`posts/`前缀，从而组织目录结构
-- 文件后缀为`.md`，则hugo会使用markdown语法来解析生成HTML
+- 这里习惯性增加`posts/`前缀，从而组织好目录结构
+- 如果你想用markdown来编写内容，则文件后缀为`.md`
 
 然后你就可以使用你喜欢的Markdown编辑器来写博客啦。比如猩哥最喜欢的`Typora`编辑器，完美如图~
 
@@ -81,7 +99,7 @@ Resolving deltas: 100% (1206/1206), done.
 
 ![image-20210317175514552](blog-with-hugo.assets/image-20210317175514552.png)
 
-## 本地预览效果
+## 本地预览
 
 当你完成了markdown博客后，就可以本地预览效果
 
@@ -114,21 +132,54 @@ Press Ctrl+C to stop
 
 ![image-20210317180007125](blog-with-hugo.assets/image-20210317180007125.png)
 
-值得一提的是，如果你的blog markdown内容发生了变更，比如又写了一部分博文，然后保存。这时候浏览器端是可以实时查看到改动效果的。不需要重新启动服务，甚至都不需要手动刷新浏览器！
+>  值得一提的是，如果你的post内容发生了变更，页面会**自动更新**。
+>
+> 没错，**不需要重新启动服务**，甚至都**不需要手动刷新浏览器!**
 
-# 上传在线博客
+## 在线托管
 
-## Gitee Pages
+### 生成静态资源
 
-- 创建一个和你用户名一样的repo
-- 把博客项目上传到git仓库
-- TODO：设置pages啥的，done！
+可以通过`hugo help`查看参数
 
-## Github Pages
+- `--destination`是制定生成静态文件目的地目录。这里之所以设置为docs，是方便和github集成，后面会提到
+- `--buildDrafts`表示content/posts中标记为`draft`的post，也会被包括进来生成静态页面
+- `--cleanDestinationDir`静态目录中没有的文件，最终也不会出现在destination目录中
 
-![截屏2021-03-17 15.21.00](blog-with-hugo.assets/截屏2021-03-17 15.21.00.png)
+```bash
+hugo --destination ./docs --buildDrafts --cleanDestinationDir
+```
 
-# Reference
+### Gitee Pages
+
+- 创建一个和你用户名一样的repo，比如<>
+- 把代码push到远端仓库
+- 在repo的服务中点击`Gitee Pages`进入
+
+![截屏2021-03](blog-with-hugo.assets/截屏2021-03.png)
+
+- 设置部署目录为`/docs`，并强制使用HTTPS（好习惯）
+
+![image-20210318172443454](blog-with-hugo.assets/image-20210318172443454.png)
+
+- 点击“启动”，不过几秒钟，就会显示`已开启 Gitee Pages 服务，网站地址： [https://wikke.gitee.io](https://wikke.gitee.io/)`
+
+### Github Pages
+
+- 创建一个`<github-id>.github.io`的repo
+
+- 在`Settings-GitHub Pages`中，选择`master`分支下的`/docs`目录，为未来博客的静态HTLM资源目录
+
+![截屏1](blog-with-hugo.assets/截屏1.png)
+
+- 上传git仓库到远端master分支
+- 过一会儿，你就可以在`<github-id>.github.io`看到你的个人blog啦
+
+##  More
+
+- 你还可以访问[https://github.com/Vimux/Mainroad/](https://github.com/Vimux/Mainroad/)查看更多mainroad主题的配置，比如社交账号，个人信息，主题色定制等等
+
+## Reference
 
 1. [https://gohugo.io/getting-started/quick-start/](https://gohugo.io/getting-started/quick-start/)
 2. [https://wikke.gitee.io/](https://wikke.gitee.io/)
