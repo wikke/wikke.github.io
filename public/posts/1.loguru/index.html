@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>使用Loguru，优雅记录Python日志 - 猩球科技</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="猩球科技" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">猩球科技</div>
+					
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">使用Loguru，优雅记录Python日志</h1>
+			
+		</header><div class="content post__content clearfix">
+			<p><img src="/posts/1.loguru.assets/logo.png" alt="Loguru logo"></p>
+<p>你还在使用<code>print</code>来调试代码，记录“日志”？</p>
+<p>或者使用<code>python</code>的<code>logging</code>模块<code>getLogger</code>,<code>setLevel</code>?</p>
+<p>告诉你，都不用，赶紧使用<code>loguru</code>来记录日志吧</p>
+<h1 id="安装">安装</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install loguru
+</code></pre></div><p>就是这么简单！</p>
+<h1 id="快速上手">快速上手</h1>
+<p><code>loguru</code>的核心理念是，<strong>你需要且只需要一个<code>logger</code></strong></p>
+<h2 id="日志输出api">日志输出API</h2>
+<p>非常简单易懂</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> loguru <span style="color:#f92672">import</span> logger
+
+logger<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;Happy logging with Loguru!&#34;</span>)
+</code></pre></div><p><code>debug</code>, <code>warning</code>,<code>error</code>也都一应俱全</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logger<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;Debug message!&#34;</span>)
+logger<span style="color:#f92672">.</span>warning(<span style="color:#e6db74">&#34;I am warning you!&#34;</span>)
+logger<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#34;Ahh, Error occues~&#34;</span>)
+</code></pre></div><h2 id="定制化">定制化</h2>
+<p>调用<code>add</code>方法增加<code>handler</code>时可以做定制，比如<code>colorize</code>设置为<code>True</code>表示输出颜色，而<code>format</code>参数代表日志输出的内容格式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+
+logger<span style="color:#f92672">.</span>add(sys<span style="color:#f92672">.</span>stdout, colorize<span style="color:#f92672">=</span>True, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;green&gt;{time:YYYY-MM-DD at HH:mm:ss}&lt;/green&gt; | &lt;level&gt;{message}&lt;/level&gt;&#34;</span>)
+</code></pre></div><h2 id="日志文件">日志文件</h2>
+<ul>
+<li>
+<p><code>logger.add('log-{time}.log', encoding=&quot;utf-8&quot;)</code>会给日志文件名自动增加时间信息以区分，比如<code>log-2021-03-15_23-36-51_241786.log</code>，<code>encoding</code>参数设置保存为UTF-8编码</p>
+</li>
+<li>
+<p><code>logger.add('log-{time}.log', rotation=&quot;500MB&quot;)</code>会在超过500M时，自动创建新的日志文件</p>
+</li>
+<li>
+<p><code>logger.add('log-{time}.log', rotation=&quot;00:00&quot;)</code>会在每天<code>00:00</code>自动创建新的日志文件</p>
+</li>
+<li>
+<p><code>logger.add('log-{time}.log', compression=&quot;zip&quot;)</code>会以zip文件保存日志，节省磁盘空间</p>
+</li>
+</ul>
+<p>这些参数当然可以组合使用，比如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logger<span style="color:#f92672">.</span>add(<span style="color:#e6db74">&#39;log-{time}.log&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>, rotation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;00:00&#34;</span>, compression<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;zip&#34;</span>)
+</code></pre></div><h2 id="字符串format">字符串format</h2>
+<p>日志内容的format和<code>str.format()</code>用法类似</p>
+<p>可以使用最新的<code>f-string</code>方式，代替<code>%</code>做内容format</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">person <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Alice&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">12</span>}
+logger<span style="color:#f92672">.</span>info(f<span style="color:#e6db74">&#34;info: {person}&#34;</span>)
+</code></pre></div><h2 id="异常日志捕获">异常日志捕获</h2>
+<p>是不是经常忘记写<code>try...except...</code></p>
+<p>是不是经常程序出错了，日志中也没有任何上下文记录？</p>
+<p>就像下面这个例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f1</span>(a, b):
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">/</span> b
+  
+f1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+</code></pre></div><p>那么你可以增加一条注解轻松解决</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@logger.catch</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f2</span>(a, b):
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">/</span> b
+  
+
+f2(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+</code></pre></div><p>遍可以详细地记录日志调用堆栈，以及上下文变量取值。</p>
+<p><img src="/posts/1.loguru.assets/image-20210316000504039.png" alt="image-20210316000504039"></p>
+<h1 id="参考">参考</h1>
+<ol>
+<li><a href="https://github.com/Delgan/loguru">https://github.com/Delgan/loguru</a></li>
+</ol>
+
+		</div>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 猩球科技.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>
