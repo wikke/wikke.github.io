@@ -4,7 +4,7 @@ date: 2021-03-17T17:33:01+08:00
 draft: true
 ---
 
-![Loguru logo](1.loguru.assets/logo.png)
+![Loguru logo](loguru.assets/logo.png)
 
 你还在使用`print`来调试代码，记录“日志”？
 
@@ -106,7 +106,7 @@ f2(1, 0)
 
 遍可以详细地记录日志调用堆栈，以及上下文变量取值。
 
-![image-20210316000504039](1.loguru.assets/image-20210316000504039.png)
+![image-20210316000504039](loguru.assets/image-20210316000504039.png)
 
 # 参考
 
