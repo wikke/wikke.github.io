@@ -84,7 +84,7 @@ Resolving deltas: 100% (1206/1206), done.
 - title即网站的标题
 - theme填写你指定的theme。你可以clone多个theme的submodule，这里选择你想用的那个
 
-![image-20210318175001751](blog-with-hugo.assets/image-20210318175001751.png)
+<img src="blog-with-hugo.assets/image-20210318175001751.png" alt="image-20210318175001751" style="zoom:50%;" />
 
 ## 创建post，即文章/博客
 
@@ -156,11 +156,11 @@ hugo --destination ./docs --buildDrafts --cleanDestinationDir
 - 把代码push到远端仓库
 - 在repo的服务中点击`Gitee Pages`进入
 
-![截屏2021-03](blog-with-hugo.assets/截屏2021-03.png)
+<img src="blog-with-hugo.assets/截屏2021-03.png" alt="截屏2021-03" style="zoom:50%;" />
 
 - 设置部署目录为`/docs`，并强制使用HTTPS（好习惯）
 
-![image-20210318172443454](blog-with-hugo.assets/image-20210318172443454.png)
+<img src="blog-with-hugo.assets/image-20210318172443454.png" alt="image-20210318172443454" style="zoom:50%;" />
 
 - 点击“启动”，不过几秒钟，就会显示`已开启 Gitee Pages 服务，网站地址： [https://wikke.gitee.io](https://wikke.gitee.io/)`
 
@@ -170,7 +170,7 @@ hugo --destination ./docs --buildDrafts --cleanDestinationDir
 
 - 在`Settings-GitHub Pages`中，选择`master`分支下的`/docs`目录，为未来博客的静态HTLM资源目录
 
-![截屏1](blog-with-hugo.assets/截屏1.png)
+<img src="blog-with-hugo.assets/截屏1.png" alt="截屏1" style="zoom:50%;" />
 
 - 上传git仓库到远端master分支
 - 过一会儿，你就可以在`<github-id>.github.io`看到你的个人blog啦
