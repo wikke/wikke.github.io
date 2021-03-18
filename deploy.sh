@@ -1,4 +1,4 @@
-hugo -D
+hugo --destination ./docs
 /Users/wikke/.pythonenv/default/bin/python scripts/fix_img_path.py
 git add .
 git commit -m 'update'
