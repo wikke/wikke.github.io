@@ -1,4 +1,4 @@
-hugo --destination ./docs
+hugo --destination ./docs --buildDrafts --cleanDestinationDir
 /Users/wikke/.pythonenv/default/bin/python scripts/fix_img_path.py
 git add .
 git commit -m 'update'
