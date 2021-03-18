@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 猩球科技</title>
-    <link>http://wikke.github.io/posts/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on 猩球科技</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Mar 2021 19:33:21 +0800</lastBuildDate><atom:link href="http://wikke.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Mar 2021 19:33:21 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用Hugo&#43;Markdown创建个人博客，部署在Github/Gitee</title>
-      <link>http://wikke.github.io/posts/blog-with-hugo/</link>
+      <link>/posts/blog-with-hugo/</link>
       <pubDate>Wed, 17 Mar 2021 19:33:21 +0800</pubDate>
       
-      <guid>http://wikke.github.io/posts/blog-with-hugo/</guid>
+      <guid>/posts/blog-with-hugo/</guid>
       <description>Hugo介绍 Hugo是用Go语言开发的非常流行的开源静态网站生成器，类似于jekyll，Hexo。
 得益于Go语言的优良特性，Hugo运行速度非常快。
 今天猩哥带大家体验一遍！
@@ -24,10 +24,10 @@
     
     <item>
       <title>使用Loguru，优雅记录Python日志</title>
-      <link>http://wikke.github.io/posts/loguru/</link>
+      <link>/posts/loguru/</link>
       <pubDate>Wed, 17 Mar 2021 17:33:01 +0800</pubDate>
       
-      <guid>http://wikke.github.io/posts/loguru/</guid>
+      <guid>/posts/loguru/</guid>
       <description>你还在使用print来调试代码，记录“日志”？
 或者使用python的logging模块getLogger,setLevel?
 告诉你，都不用，赶紧使用loguru来记录日志吧

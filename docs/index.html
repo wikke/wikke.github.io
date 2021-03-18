@@ -8,6 +8,19 @@
 	<title>猩球科技</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
+		<meta property="og:title" content="猩球科技" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/" />
+<meta property="og:updated_time" content="2021-03-17T19:33:21+08:00" />
+
+		<meta itemprop="name" content="猩球科技">
+<meta itemprop="description" content="">
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="猩球科技"/>
+<meta name="twitter:description" content=""/>
+
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -40,58 +53,16 @@
 			<div class="primary">
 			
 <main class="main list" role="main">
-	<article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/blog-with-hugo/" rel="bookmark">
-			使用Hugo&#43;Markdown创建个人博客，部署在Github/Gitee
-			</a>
-		</h2>
-		
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Hugo介绍 Hugo是用Go语言开发的非常流行的开源静态网站生成器，类似于jekyll，Hexo。
-得益于Go语言的优良特性，Hugo运行速度非常快。
-今天猩哥带大家体验一遍！
-安装 ➜ ~ brew install hugo ... ➜ ~ hugo version Hugo Static Site Generator v0.80.0/extended darwin/amd64 BuildDate: unknown 更多操作系统的Hugo安装，参考https://gohugo.io/getting-started/installing/
-初始化站点 运行hugo new site &lt;your-site-name&gt;初始化
-比如猩哥打算用Hugo来搭建自己的个人博客https://wikke.gitee.io/、https://wikke.github.io/
-➜ ~ hugo new site blogs Congratulations! Your new Hugo site is created in /Users/wikke/blogs. Just a few more steps and you&#39;re ready to go: 1. Download a theme into the same-named folder. Choose a theme from https://themes.gohugo.io/ or create your own with the &#34;hugo new theme &lt;THEMENAME&gt;&#34; command.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/blog-with-hugo/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/loguru/" rel="bookmark">
-			使用Loguru，优雅记录Python日志
-			</a>
-		</h2>
-		
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		你还在使用print来调试代码，记录“日志”？
-或者使用python的logging模块getLogger,setLevel?
-告诉你，都不用，赶紧使用loguru来记录日志吧
-安装 pip install loguru 就是这么简单！
-快速上手 loguru的核心理念是，你需要且只需要一个logger
-日志输出API 非常简单易懂
-from loguru import logger logger.debug(&#34;Happy logging with Loguru!&#34;) debug, warning,error也都一应俱全
-logger.debug(&#34;Debug message!&#34;) logger.warning(&#34;I am warning you!&#34;) logger.error(&#34;Ahh, Error occues~&#34;) 定制化 调用add方法增加handler时可以做定制，比如colorize设置为True表示输出颜色，而format参数代表日志输出的内容格式
-import sys logger.add(sys.stdout, colorize=True, format=&#34;&lt;green&gt;{time:YYYY-MM-DD at HH:mm:ss}&lt;/green&gt; | &lt;level&gt;{message}&lt;/level&gt;&#34;) 日志文件   logger.add('log-{time}.log', encoding=&quot;utf-8&quot;)会给日志文件名自动增加时间信息以区分，比如log-2021-03-15_23-36-51_241786.log，encoding参数设置保存为UTF-8编码
-  logger.add('log-{time}.log', rotation=&quot;500MB&quot;)会在超过500M时，自动创建新的日志文件
-  logger.add('log-{time}.log', rotation=&quot;00:00&quot;)会在每天00:00自动创建新的日志文件
-  logger.add('log-{time}.log', compression=&quot;zip&quot;)会以zip文件保存日志，节省磁盘空间
-  这些参数当然可以组合使用，比如
-logger.add(&#39;log-{time}.log&#39;, encoding=&#34;utf-8&#34;, rotation=&#34;00:00&#34;, compression=&#34;zip&#34;) 字符串format 日志内容的format和str.format()用法类似
-可以使用最新的f-string方式，代替%做内容format
-person = {&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 12} logger.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/loguru/">Read more…</a>
-	</div>
-</article>
+	
+		<div class="warning">
+			<svg class="warning__icon icon icon-files" width="96" height="96" viewBox="0 0 384 384"><path d="m368 64h-224-16v16 288 16h16 224 16v-16-288-16zm-16 288h-192v-256h192zm-320-320h192v16h32v-32-16h-16-224-16v16 288 16h16 96v-32h-80zm144 272h160v-32h-160zm0-64h160v-32h-160zm0-64h160v-32h-160zm-128 64h64v-32h-64zm0-64h64v-32h-64zm0-64h64v-32h-64z"/></svg>
+			<h3 class="warning__headline">You don't have any posts yet!</h3>
+			<div class="warning__text">
+				<p class="warning__description">Once you post something in any folder (section) under the <b>content</b> directory, it will appear here. Only one section (with the most posts) will be displayed on the main page by default.</p>
+				<p class="warning__tip"><b>Tip:</b> You can show as many sections as you like with <b><a href="https://gohugo.io/functions/where/#mainsections" rel="nofollow noopener" target="_blank">mainSections</a></b> config parameter.</p>
+			</div>
+		</div>
+	
 </main>
 
 
@@ -102,17 +73,8 @@ person = {&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 12} logger.
 			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="http://wikke.github.io/" />
+		<input type="hidden" name="sitesearch" value="/" />
 	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">Recent Posts</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/blog-with-hugo/">使用Hugo&#43;Markdown创建个人博客，部署在Github/Gitee</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/loguru/">使用Loguru，优雅记录Python日志</a></li>
-		</ul>
-	</div>
 </div>
 <div class="widget-social widget">
 	<h4 class="widget-social__title widget__title">Social</h4>

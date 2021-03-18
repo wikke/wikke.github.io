@@ -3,31 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://wikke.github.io/posts/</loc>
+    <loc>/posts/</loc>
     <lastmod>2021-03-17T19:33:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wikke.github.io/posts/blog-with-hugo/</loc>
+    <loc>/posts/blog-with-hugo/</loc>
     <lastmod>2021-03-17T19:33:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wikke.github.io/</loc>
+    <loc>/</loc>
     <lastmod>2021-03-17T19:33:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wikke.github.io/posts/loguru/</loc>
+    <loc>/posts/loguru/</loc>
     <lastmod>2021-03-17T17:33:01+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://wikke.github.io/categories/</loc>
+    <loc>/categories/</loc>
   </url>
   
   <url>
-    <loc>http://wikke.github.io/tags/</loc>
+    <loc>/tags/</loc>
   </url>
   
 </urlset>

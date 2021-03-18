@@ -84,7 +84,7 @@ Resolving deltas: 100% (1206/1206), done.
 - title即网站的标题
 - theme填写你指定的theme。你可以clone多个theme的submodule，这里选择你想用的那个
 
-![image-20210317174942476](blog-with-hugo.assets/image-20210317174942476.png)
+![image-20210318175001751](blog-with-hugo.assets/image-20210318175001751.png)
 
 ## 创建post，即文章/博客
 
@@ -93,7 +93,7 @@ Resolving deltas: 100% (1206/1206), done.
 - 这里习惯性增加`posts/`前缀，从而组织好目录结构
 - 如果你想用markdown来编写内容，则文件后缀为`.md`
 
-然后你就可以使用你喜欢的Markdown编辑器来写博客啦。比如猩哥最喜欢的`Typora`编辑器，完美如图~
+然后你就可以使用你喜欢的Markdown编辑器来写博客啦。比如猩哥最喜欢的`Typora`编辑器，完美~
 
 （我此刻正在写一篇“如何使用Hugo写博客”的博客，盗梦空间既视感）
 
