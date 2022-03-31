@@ -1,7 +1,7 @@
 ---
 title: "使用Hugo+Markdown创建个人博客，部署在Github/Gitee"
 date: 2021-03-17T19:33:21+08:00
-draft: true
+draft: false
 ---
 
 ## Hugo介绍

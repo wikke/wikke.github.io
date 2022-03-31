@@ -1,7 +1,7 @@
 ---
 title: "使用Loguru，优雅记录Python日志"
 date: 2021-03-17T17:33:01+08:00
-draft: true
+draft: false
 ---
 
 ![Loguru logo](loguru.assets/logo.png)
